@@ -3,20 +3,20 @@ will be updated later
 to do:
 
 
-delete the css and start over/ clean it up and organize better
+[x] delete the css and start over/ clean it up and organize better
 
-remove the navbar
+[x] remove the navbar
 
-style up the privacy policy a bit
+[x] style up the privacy policy a bit
 
-decide on the color palette
+[x] decide on the color palette
 
-find 2 matching fonts
+[x] find 2 matching fonts
 
-create a design
+[x] create a design
 
-implement the new design in css
+[x] implement the new design in css
 
-optimize the responsiveness - fix the box width wtf
+[x] optimize the responsiveness - fix the box width wtf
 
 finish setting up buymeacoffee and add it to the website
