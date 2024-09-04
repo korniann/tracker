@@ -19,4 +19,4 @@ to do:
 
 [x] optimize the responsiveness - fix the box width wtf
 
-finish setting up ko-fi and add it to the website
+[x] finish setting up ko-fi and add it to the website
