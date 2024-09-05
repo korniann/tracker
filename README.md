@@ -20,3 +20,17 @@ to do:
 [x] optimize the responsiveness - fix the box width wtf
 
 [x] finish setting up ko-fi and add it to the website
+
+[ ] spice up the interface (the timer)
+
+[ ] add a way to set a custom timer?
+
+[ ] add a first fermentation feature?
+
+[ ] add a bulk fermentation feature?
+
+[ ] optimize the SEO?
+
+[ ] write the readme
+
+[ ] upload 
