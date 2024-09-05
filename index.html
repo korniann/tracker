@@ -93,6 +93,7 @@
 
             /* A function that is linked to the button which starts the timer and increments the counter*/
             function performStretchAndFold() {
+                document.getElementById("timerDisplay").textContent = "30:00";
                 clearInterval(timerInterval);
                 incrementCounter();
                 startTimer();
