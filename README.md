@@ -33,4 +33,16 @@ to do:
 
 [ ] write the readme
 
+[ ] buttons/ navigation for multiple loaves
+
+[ ] the ability to name the timers/ loaves
+
+[ ] database
+
+[ ] sign up + login
+
+[ ] journal
+
+[ ] log temperature in the journal
+
 [ ] upload 
