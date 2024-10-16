@@ -45,4 +45,11 @@ to do:
 
 [ ] log temperature in the journal
 
-[ ] upload 
+[ ] upload to CS50
+
+Potential names:
+Rise'n'Stretch
+Rise'n'Fold
+Knead To Know
+Dough Diary
+The Gluten Guru
