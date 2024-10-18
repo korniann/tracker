@@ -258,20 +258,13 @@ body {
         color: #775144;
         /*font-size: 3vw;*/
       }
-    
-    
-      .tracker span {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        padding: 30px;
-        color: #FF7A00;
-        font-family: "Lilita One", sans-serif;
-        font-weight: 400;
-        font-style: normal;
-        /*font-optical-sizing: auto;*/
-        font-size: 10vh;
+
+      .set-time h2 {
+        color: #FAF5EC;
       }
+    
+
+      
 
       @media (max-width: 800px) {
         .tracker span {
@@ -293,8 +286,21 @@ body {
         border-width: 8px;
         border-color: #FAF5EC;
       }
+
+      .folds span {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        padding: 30px;
+        color: #FF7A00;
+        font-family: "Lilita One", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        /*font-optical-sizing: auto;*/
+        font-size: 10vh;
+      }
     
-      .time {
+      .current-time {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -306,6 +312,44 @@ body {
         border-style: solid;
         border-width: 8px;
         border-color: #75A3E1;
+        
+      }
+
+      .current-time span {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        padding: 30px;
+        color: #FF7A00;
+        font-family: "Lilita One", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        /*font-optical-sizing: auto;*/
+        font-size: 10vh;
+      }
+
+      .set-time {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 5vh;
+        border-radius: 25px;
+        /*outline-style: solid;
+        outline-width: 8px;
+        outline-color: #75A3E1;*/
+        border-style: solid;
+        border-width: 8px;
+        border-color: #75A3E1;
+        background-color: #75A3E1;
+        
+      }
+
+      .set-time span {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        padding: 33px;
       }
     
 .reset {
@@ -372,4 +416,37 @@ p {
   font-family: "Mulish", system-ui;
   font-weight: 400;
   font-style: normal;
+}
+
+
+input[type="number"] {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-family: "Lilita One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #FF7A00;
+  padding: 2vh; 
+  font-size: 10vh;
+  border-radius: 70px;
+  border: none;
+  text-align: center;
+  outline: none;
+  line-height: 100px;
+  width: 70%; /* <-- fix this!!! */
+}
+
+input[type="number"]::placeholder { 
+  text-align-last: center;
+  font-family: "Mulish", system-ui;
+  font-weight: 300;
+  font-style: normal;
+  font-size: 3vh;
+  color: #775144;
+ 
+  border: none;
+  outline: none;
+  transform: translateY(-20px);
 }
