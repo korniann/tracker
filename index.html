@@ -15,17 +15,6 @@
 
         <title>Stretch & Folds Tracker</title>
     </head>
-
-    <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-4WBZ5X1DQY"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-        
-          gtag('config', 'G-4WBZ5X1DQY');
-        </script>
-    
     <body style="background-color: #FAF5EC">
 
         <audio src="notification.mp3" id="notificationSound"></audio>
@@ -50,6 +39,34 @@
 
         <script>
 
+            function toggleInputAndTimer() {
+                const inputContainer = document.getElementById("set-time"); 
+                const timerContainer = document.getElementById("current-time"); 
+                const inputButton = document.getElementById("startButton");
+                const timerButton = document.getElementById("performButton");
+
+                inputContainer.style.display = "block";
+                timerContainer.style.display = "none";
+                inputButton.style.display = "block";
+                timerButton.style.display = "none";
+
+                const startButton = document.getElementById("startButton");
+                startButton.addEventListener("click", () => {
+                    const userInputTime = document.getElementById("userInputTime").value;
+
+                    // Validate input (optional)
+                    if (userInputTime <= 0 || isNaN(userInputTime)) {
+                    alert("Please enter a valid time (greater than 0 minutes).");
+                    return;
+                    }
+
+                    inputContainer.style.display = "none";
+                    timerContainer.style.display = "block";
+                    inputButton.style.display = "none";
+                    timerButton.style.display = "block";
+                });
+            }
+
             var timerInterval;
 
             function incrementCounter() {
@@ -68,9 +85,9 @@
 
 
 
-            function startTimer() {
+            function startTimer(initialTime) {
                 /* Store the initial timer in seconds*/
-                var timerValue = 30*60;
+                var timerValue = initialTime;
 
                 /* Get a reference to the audio when the timer ends*/
                 var notificationSound = document.getElementById("notificationSound");
@@ -104,12 +121,28 @@
 
             /* A function that is linked to the button which starts the timer and increments the counter*/
             function performStretchAndFold() {
-                document.getElementById("timerDisplay").textContent = "30:00";
-                clearInterval(timerInterval);
-                incrementCounter();
-                startTimer();
-            }
 
+                /* Call incrementCounter() here */
+                incrementCounter();
+
+                /* Get user input time */
+                var userInputTime = document.getElementById("userInputTime").value;
+
+                /* Validate user input */
+                if (userInputTime <= 0 || isNaN(userInputTime)) {
+                    alert("Please enter a valid time (greater than 0 minutes).");
+                    /* Exit function if invalid input */
+                    return; 
+                }
+
+                /* Convert minutes to seconds */
+                var timerValue = parseInt(userInputTime, 10) * 60;
+
+                document.getElementById("timerDisplay").textContent = userInputTime + ":00";
+                clearInterval(timerInterval);
+                /* Pass user input as argument */
+                startTimer(timerValue); 
+                }
 
 
             function resetCounterAndTimer() {
@@ -123,16 +156,24 @@
                 /* Get a reference to the HTML element that displays the remaining timer value*/
                 var timerDisplay = document.getElementById("timerDisplay");
                 timerDisplay.textContent = 0;
-        }
+
+                /* Call toggleInputAndTimer() to revert the display */
+                toggleInputAndTimer();
+            }
 
 
             /* A script for making the donation bar appear after a delay */
             document.addEventListener("DOMContentLoaded", function() {
+                /* Call the toggle function */ 
+                toggleInputAndTimer();
+
+
                 setTimeout(function() {
                 document.querySelector('.donation').classList.add('show');
                 /* Delay adding the class by 5 minutes (the setTimeout uses ms) */
                 }, 300*1000); 
             });
+
 
         </script>
 
@@ -144,19 +185,28 @@
                     <h2>FOLDS COMPLETED:</h2>
                     <span id="foldCounter">0</span>
                 </div>
-                <button onclick="resetCounterAndTimer()" class="reset">Reset the tracker</button>
+                <button onclick="resetCounterAndTimer()" class="reset" id="resetButton">Reset the tracker</button>
             </div>
+            
+        
+            <div class="time-outer">
+                <div class="set-time" id="set-time">
+                    <h2>FERMENTATION TIME:</h2>
+                    <span>
+                        <input type="number" id="userInputTime" placeholder="0 min">
+                    </span>
+                </div>
+                    <button onclick="performStretchAndFold()" class="perform" id="startButton">Set the timer</button>
+                
 
-           <div class="time-outer">
-                <div class="time">
+                <div class="current-time" id="current-time">
                     <h2>TIME REMAINING:</h2>
                     <span id="timerDisplay">0</span>
                 </div>
-                <button onclick="performStretchAndFold()" class="perform">Perform a stretch & fold</button>
+                    <button onclick="performStretchAndFold()" class="perform" id="performButton">Perform a stretch & fold</button>
+                </div>
             </div>
         </div>
-
-    </div>
 
         <footer class="footer">
             <div>
