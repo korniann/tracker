@@ -23,7 +23,7 @@ to do:
 
 [ ] spice up the interface (the timer)
 
-[ ] add a way to set a custom timer?
+[x] add a way to set a custom timer?
 
 [ ] add a first fermentation feature?
 
