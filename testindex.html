@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <link href="styles.css" rel="stylesheet">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Mulish&display=swap" rel="stylesheet">
+        <title>Stretch & Folds Tracker</title>
+    </head>
+    <body style="background-color: #FAF5EC">
+        <audio src="notification.mp3" id="notificationSound"></audio>
+
+        <div class="donation">
+            <p><a href="https://ko-fi.com/korniann" target="_blank">Keep the dough rising! Tip $1 to support the project. ➜</a></p>
+        </div>
+
+        <div class="tracker-heading">
+            <h1>Sourdough Stretch & Fold Tracker</h1>
+        </div>
+
+        <div class="main-block">
+            <!-- Navigation tabs for trackers -->
+            <ul class="nav nav-tabs d-flex" id="trackerTabs" role="tablist">
+                <!-- Default tab shown on page load -->
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="tracker-default-tab" data-bs-toggle="tab" href="#tracker-default" role="tab" aria-controls="tracker-default" aria-selected="true">Default Tracker</a>
+                </li>
+                <li class="nav-item order-3">
+                    <a class="nav-link" id="tracker-default-tab" data-bs-toggle="tab" href="#tracker-default" role="tab" aria-controls="tracker-default" aria-selected="false" onclick="addTracker()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="20" fill="currentColor" class="bi bi-plus-square" viewBox="2 0.5 16 16">
+                            <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                        </svg>
+                        Add New
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Tab content for trackers -->
+            <div class="tab-content" id="trackerTabContent">
+                <!-- Default tracker content -->
+                <div class="tab-pane fade show active" id="tracker-default" role="tabpanel" aria-labelledby="tracker-default-tab">
+                    <div class="tracker-name-outer">
+                    <h2 id="trackerName">Default Tracker</h2>
+                    <button type="button" class="iconButton" onclick="renameDefaultTracker(this)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                            <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/>
+                        </svg>
+                      </button>
+                    </div>
+                    <div class="tracker">
+                        <div class="folds-outer">
+                            <div class="folds">
+                                <h3>FOLDS COMPLETED:</h3>
+                                <span id="foldCounter-default">0</span>
+                            </div>
+                            <button onclick="resetCounterAndTimer('default')" class="reset btn btn-warning">Reset Tracker</button>
+                        </div>
+
+                        <div class="time-outer">
+                            <div class="set-time" id="set-time-default">
+                                <h3>FERMENTATION TIME:</h3>
+                                <span>
+                                    <input type="number" id="userInputTime-default" placeholder="0 min">
+                                </span>
+                            </div>
+                                <button onclick="performStretchAndFold('default')" class="perform" id="startButton-default">Set The Timer</button>
+                            
+                            <div class="current-time" id="current-time-default">
+                                <h3>TIME REMAINING:</h3>
+                                <span id="timerDisplay-default">0</span>
+                            </div>
+                                <button onclick="performStretchAndFold('default')" class="perform" id="performButton-default">Perform Stretch & Fold</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            <footer class="footer">
+                <div>
+                    <p><a href="privacypolicy.html">Privacy Policy</a></p>
+                    <p>Author: Kornelija Anttila</p>
+                </div>
+            </footer>
+            
+        
+
+        <script>
+            /* Global reference for the notification sound */
+            const notificationSound = document.getElementById("notificationSound");
+
+            let trackerIdCounter = 0; // Unique ID for each tracker
+        
+            // Function to add a new tracker tab and its content
+            function addTracker() {
+
+                trackerIdCounter++; // Increment tracker ID
+                const newTrackerId = "tracker-" + trackerIdCounter;
+                const trackerName = `Tracker ${trackerIdCounter}`;
+
+                // Create a new tab for the tracker
+                const trackerTabs = document.getElementById("trackerTabs");
+                const newTab = document.createElement("li");
+                newTab.classList.add("nav-item");
+                newTab.innerHTML = `
+                    <a class="nav-link" id="${newTrackerId}-tab" data-bs-toggle="tab" href="#${newTrackerId}" role="tab" aria-controls="${newTrackerId}" aria-selected="false">${trackerName}</a>
+                `;
+                trackerTabs.appendChild(newTab);
+
+                // Create content for the new tracker
+                const trackerTabContent = document.getElementById("trackerTabContent");
+                const newTabContent = document.createElement("div");
+                newTabContent.classList.add("tab-pane", "fade");
+                newTabContent.setAttribute("id", newTrackerId);
+                newTabContent.setAttribute("role", "tabpanel");
+                newTabContent.setAttribute("aria-labelledby", `${newTrackerId}-tab`);
+                newTabContent.innerHTML = `
+                <div class="tracker-name-outer">
+                    <h2 id="trackerName">${trackerName}</h2>
+                    <button type="button" class="iconButton" id="renameTracker" onclick="renameTracker(this)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                            <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"></path>
+                        </svg>
+                    </button>
+                </div>    
+                <div class="tracker">
+                        <div class="folds-outer">
+                            <div class="folds">
+                                <h3>FOLDS COMPLETED:</h3>
+                                <span id="foldCounter-${trackerIdCounter}">0</span>
+                            </div>
+                            <button onclick="resetCounterAndTimer(${trackerIdCounter})" class="reset btn btn-warning">Reset Tracker</button>
+                        </div>
+
+                        <div class="time-outer">
+                            <div class="set-time" id="set-time-${trackerIdCounter}">
+                                <h3>FERMENTATION TIME:</h3>
+                                <span>
+                                    <input type="number" id="userInputTime-${trackerIdCounter}" placeholder="0 min">
+                                </span>
+                            </div>
+                                <button onclick="performStretchAndFold(${trackerIdCounter})" class="perform" id="startButton-${trackerIdCounter}">Set The Timer</button>
+                            
+                            <div class="current-time" id="current-time-${trackerIdCounter}" style="display: none;">
+                                <h3>TIME REMAINING:</h3>
+                                <span id="timerDisplay-${trackerIdCounter}">0</span>
+                            </div>
+                                <button onclick="performStretchAndFold(${trackerIdCounter})" class="perform" id="performButton-${trackerIdCounter}">Perform Stretch & Fold</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                trackerTabContent.appendChild(newTabContent);
+
+                // Select the newly added tab
+                new bootstrap.Tab(newTab.querySelector('a')).show();
+                document.getElementById("trackerName").value = ''; // Clear input
+
+                // Call toggleInputAndTimer for the new tracker
+                toggleInputAndTimer(trackerIdCounter);
+            }
+
+            /* Function to rename a tracker */
+            function renameTracker(buttonElement) {
+                const trackerNameContainer = buttonElement.closest(".tracker-name-outer");
+                const trackerNameSpan = trackerNameContainer.querySelector("h2"); // Correct selector for tracker name
+                const currentName = trackerNameSpan.textContent;
+                const newName = prompt("Enter a new name:", currentName);
+
+                if (newName && newName.trim() !== "") {
+                    trackerNameSpan.textContent = newName.trim();
+
+                    const trackerId = trackerNameContainer.closest(".tab-pane").getAttribute("id");
+                    const trackerTab = document.querySelector(`a[href="#${trackerId}"]`);
+                    trackerTab.textContent = newName.trim();
+                }
+            }
+
+
+            /* Function to rename the default tracker only */
+            function renameDefaultTracker() {
+                const defaultTab = document.getElementById("tracker-default-tab");
+                const defaultTrackerName = document.getElementById("trackerName");
+
+                // Prompt the user for a new name
+                const newName = prompt("Enter a new name:", defaultTrackerName.textContent);
+
+                if (newName && newName.trim() !== "") {
+                    // Update both the tab and the tracker content with the new name
+                    defaultTab.textContent = newName.trim();
+                    defaultTrackerName.textContent = newName.trim();
+                }
+            }
+
+            // Function to toggle the input and timer display
+            function toggleInputAndTimer(id) {
+                // Access the correct elements for this tracker by using the dynamic id
+                const inputContainer = document.getElementById(`set-time-${id}`);
+                const timerContainer = document.getElementById(`current-time-${id}`);
+                const inputButton = document.getElementById(`startButton-${id}`);
+                const timerButton = document.getElementById(`performButton-${id}`);
+
+                // Debugging logs to verify elements
+                console.log("Elements fetched:", {
+                    inputContainer,
+                    timerContainer,
+                    inputButton,
+                    timerButton
+                });
+        
+                // Initially show the input fields and "Set Timer" button, hide the timer display and "Perform" button
+                inputContainer.style.display = "block";
+                timerContainer.style.display = "none";
+                inputButton.style.display = "block";
+                timerButton.style.display = "none";
+        
+                // Ensure that clicking the "Set Timer" button starts the timer for this specific tracker
+                inputButton.onclick = function() {
+                    const userInputTime = document.getElementById(`userInputTime-${id}`).value;
+        
+                    // Hide the input fields and show the timer and "Perform" button after the timer is set
+                    inputContainer.style.display = "none";
+                    timerContainer.style.display = "block";
+                    inputButton.style.display = "none";
+                    timerButton.style.display = "block";
+        
+                    // Start the timer countdown for this tracker
+                    startTimer(userInputTime * 60, id); // Pass the user input in seconds
+                };
+            }
+        
+            
+            function performStretchAndFold(id) {
+                // Call incrementCounter() with the tracker ID
+                incrementCounter(id);
+        
+                // Get user input time from the appropriate input field for this tracker
+                var userInputTime = document.getElementById("userInputTime-" + id).value;
+        
+                // Validate user input
+                if (userInputTime <= 0 || isNaN(userInputTime)) {
+                    alert("Please enter a valid time (greater than 0 minutes).");
+                    return; // Exit function if invalid input
+                }
+        
+                // Convert minutes to seconds
+                var timerValue = parseInt(userInputTime, 10) * 60;
+        
+                // Display the timer for this tracker
+                document.getElementById("timerDisplay-" + id).textContent = userInputTime + ":00";
+                
+                // Clear previous interval for this tracker
+                clearInterval(window[`timerInterval-${id}`]); 
+        
+                // Start the countdown timer for this tracker
+                startTimer(timerValue, id);
+            }
+
+        
+            function incrementCounter(id) {
+                // Get the fold counter element for the specific tracker
+                var foldCounterElement = document.getElementById("foldCounter-" + id);
+                
+                // Extract the current fold count as a number
+                var foldsNumber = parseInt(foldCounterElement.textContent);
+        
+                // Increase the fold count
+                foldsNumber++;
+        
+                // Update the fold counter display with the incremented value
+                foldCounterElement.textContent = foldsNumber.toString();
+            }
+        
+            // Function to reset the fold counter and timer
+            function resetCounterAndTimer(id) {
+                document.getElementById(`foldCounter-${id}`).textContent = "0"; // Reset counter
+                document.getElementById(`timerDisplay-${id}`).textContent = "0"; // Reset timer
+                clearInterval(window[`timerInterval-${id}`]); // Clear timer
+                toggleInputAndTimer(id); // Revert to input display
+            }
+        
+            // Function to start the timer countdown
+            function startTimer(timerValue, id) {
+                const timerDisplay = document.getElementById(`timerDisplay-${id}`);
+        
+                function updateTimer() {
+                    timerValue--;
+                    const minutes = Math.floor(timerValue / 60);
+                    const seconds = timerValue % 60;
+                    timerDisplay.textContent = `${minutes}:${seconds.toString().padStart(2, "0")}`;
+        
+                    /* If timerValue reaches 0, play the notification sound */
+                    if (timerValue === 0) {
+                        clearInterval(window[`timerInterval-${id}`]);
+                        /* Reset the audio and play the notification sound */
+                        notificationSound.pause();
+                        notificationSound.currentTime = 0; // Reset to the beginning
+                        notificationSound.play();
+                        notificationSound.volume = 0.5;
+                    }
+                }
+        
+                /* Store the interval for this specific tracker using a dynamic key */
+                window[`timerInterval-${id}`] = setInterval(updateTimer, 1000);
+            }
+
+            
+            document.addEventListener("DOMContentLoaded", function() {
+                /* Initialize the toggle function */ 
+                toggleInputAndTimer('default');
+
+                /* A script for making the donation bar appear after a delay */
+                setTimeout(function() {
+                    document.querySelector('.donation').classList.add('show');
+                }, 300 * 1000);
+            });
+            
+        </script>
+        
+    </body>
+</html>
