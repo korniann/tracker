@@ -10,6 +10,15 @@ body {
     min-height: 100vh;
   }
   
+
+.main-block {
+  margin: 0px 30px 80px 30px;
+  border-radius: 15px;
+  border-style: solid;
+  border-width: 8px;
+  border-color: #FF7A00;
+}
+
 .donation {
   background-color: #775144;
   display: flex;
@@ -54,7 +63,7 @@ body {
       margin: 0;
       padding: 20;
       overflow: hidden;
-      background-color: #775144;
+      background-color: #FF7A00;
     }
   
     li {
@@ -94,65 +103,9 @@ body {
           color: #FAF5EC;
       }*/
   
-  
-  /*.description {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 50px;
-  }*/
-  
-      /*.description h2 {
-        color: white;
-        font-size: 50px;
-  }
-  
-      .description h3 {
-        color: white;
-      }
-  
-      .description h4 {
-        color: white;
-        text-align: left;
-      }
-  
-      .description p {
-        color: white;
-        text-align: left;
-      }
-  
-  .descriptions {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-  
-  @media (max-width: 800px) {
-    .descriptions {
-      display: flex;
-      flex-direction: column;
-    }
-  }
-  
-  .description-inner {
-    width: 75vw;
-  }
-  
-  .description-title {
-    padding-top: 100px;
-    padding-bottom: 150px;
-  }
-  
-  .description-column {
-    width: 350px;
-  }*/
-  
-  
   .footer {
-    background-color: #FAF5EC;
-    padding: 30px 30px 10px 30px;
+    background-color: #faf5ec;
+    padding: 10px 50px 10px 50px;
     width: 100%;
     position:fixed;
     bottom:0;
@@ -166,8 +119,6 @@ body {
         align-items: center;
         margin: auto;
       }
-
-  
 
 
 .tracker {
@@ -232,21 +183,34 @@ body {
       }
     }
 
-    .tracker-heading h1 {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      padding: 5vw;
-      text-align: center;
-      /*font-size: 3.5vw;*/
-      font-family: "Lilita One", sans-serif;
-      font-weight: 400;
-      font-style: normal;
-      color: #FF7A00;
-    }
+h1 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 3vw;
+  text-align: center;
+  font-family: "Lilita One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #FF7A00;
+  }
+
+h2 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-right: 10px;
+  text-align: center;
+  font-family: "Mulish", system-ui;
+  font-weight: 600;
+  font-style: normal;
+  color: #775144;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+  }
 
     
-      .tracker h2 {
+      .tracker h3 {
         display: flex;
         justify-content: center;
         flex-wrap: wrap;
@@ -259,12 +223,10 @@ body {
         /*font-size: 3vw;*/
       }
 
-      .set-time h2 {
+      .set-time h3 {
         color: #FAF5EC;
       }
     
-
-      
 
       @media (max-width: 800px) {
         .tracker span {
@@ -279,12 +241,9 @@ body {
         justify-content: center;
         padding: 5vh;
         border-radius: 25px;
-        /*outline-style: solid;
-        outline-width: 8px;
-        outline-color: #75A3E1;*/
         border-style: solid;
         border-width: 8px;
-        border-color: #FAF5EC;
+        border-color: #faf5ec00;
       }
 
       .folds span {
@@ -352,6 +311,66 @@ body {
         padding: 33px;
       }
     
+.tracker-name-outer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.iconButton {
+  border-radius: 12px;
+  background-color: #faf5ec00;
+  padding: 5px 10px 10px 10px;
+  border: hidden;
+  color: #775144;
+}
+
+  .iconButton:hover {
+    background-color: #e6e1d9;
+  }
+
+.nav-tabs {
+  border: none;
+}
+.nav-tabs .nav-link {
+  border: none;
+  
+}
+
+  .nav-tabs .nav-link.active {
+    background-color: #FAF5EC;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: stretch;
+    text-align: center;
+    font-family: "Mulish", system-ui;
+    font-weight: 500;
+    font-style: normal;
+    font-size: large;
+    letter-spacing: 0.5px;
+    color: #FAF5EC;
+    border: none;
+  }
+
+  .nav-link {
+    background-color: #FAF5EC;
+    font-family: "Mulish", system-ui;
+    font-weight: 500;
+    font-style: normal;
+    color: #FAF5EC;
+    border: none;
+  }
+
+  .nav-link:hover {
+    background-color: #EB631B;
+    color: #FAF5EC;
+    border: none;
+  }
+
 .reset {
   border-radius: 50px;
   background-color: #75A3E1;
@@ -369,6 +388,7 @@ body {
 
   .reset:hover {
     background-color: #588acc;
+    color: #FAF5EC;
   }
 
 
@@ -391,18 +411,6 @@ body {
     background-color: #EB631B;
   }
 
-
-/*.about h3 {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 30px;
-  margin: auto;
-  height: 90vh;
-  width: 70vw;
-  text-align: center;
-}*/
-  
 
 .privacy-body {
   display: flex;
@@ -435,7 +443,7 @@ input[type="number"] {
   text-align: center;
   outline: none;
   line-height: 100px;
-  width: 70%; /* <-- fix this!!! */
+  width: 70%; 
 }
 
 input[type="number"]::placeholder { 
@@ -445,7 +453,6 @@ input[type="number"]::placeholder {
   font-style: normal;
   font-size: 3vh;
   color: #775144;
- 
   border: none;
   outline: none;
   transform: translateY(-20px);
