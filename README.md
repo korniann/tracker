@@ -1,5 +1,5 @@
 # Stretch & Fold Tracker - CS50 Final Project
-#### Video Demo:  <URL HERE>
+#### Video Demo: https://youtu.be/fwUDsjVnWGQ
 #### Description:
 
 As my final project for CS50 course, I wanted to create something that I knew I would benefit myself from. I have been baking sourdough bread for a few months now, but one thing has been bothering me ever since I started: keeping track of the stretches and folds. In order for the dough to develop gluten and turn into a soft, bouncy loaf of bread, it is recommended to stretch it a few times, every 30-45 minutes. Unfortunately, I would often forget which set of stretches I am on, or even accidentally ignore the timers I have set on my phone. Eventually, I started using my smart watch and a notepad, but I thought that a simple, aesthetically pleasing online tool could help not only myself, but others who have busy lives, as well.
